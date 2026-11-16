@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens. "Understory": mineral green-grey ground, moss ink, one pollen accent. */
+:root {
+  --bg: 238 241 236;
+  --surface: 251 252 250;
+  --ink: 20 32 27;
+  --muted: 94 110 101;
+  --line: 214 222 214;
+  --brand: 31 77 58;
+  --brand-fg: 244 248 242;
+  --fern: 62 139 99;
+  --tint: 224 236 219;
+  --pollen: 231 179 74;
+  --danger: 178 64 52;
+  --side: 15 28 23;
+  --side-fg: 244 248 242;
+  color-scheme: light;
+}
+.dark {
+  --bg: 12 21 17;
+  --surface: 20 33 27;
+  --ink: 232 238 229;
+  --muted: 140 157 147;
+  --line: 38 54 45;
+  --brand: 112 194 144;
+  --brand-fg: 10 20 15;
+  --fern: 112 194 144;
+  --tint: 30 49 39;
+  --pollen: 238 190 95;
+  --danger: 232 118 104;
+  --side: 9 17 13;
+  --side-fg: 244 248 242;
+  color-scheme: dark;
+}
+
+@layer base {
+  html { @apply bg-bg text-ink antialiased; }
+  body { @apply font-sans min-w-[320px]; }
+  h1, h2, h3 { @apply font-display font-normal tracking-tight; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-brand; outline-style: solid; }
+  ::selection { background: rgb(var(--pollen) / .45); }
+}
+
+@layer components {
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50; }
+  .btn-primary { @apply bg-brand text-brand-fg hover:bg-brand/90; }
+  .btn-soft { @apply border border-line bg-surface text-ink hover:bg-tint; }
+  .btn-ghost { @apply text-muted hover:bg-tint hover:text-ink; }
+  .btn-danger { @apply border border-danger/30 text-danger hover:bg-danger/10; }
+  .btn-pollen { @apply bg-pollen text-[#2a1f05] hover:brightness-95; }
+  .card { @apply rounded-panel border border-line bg-surface; }
+  .field { @apply w-full rounded-xl border border-line bg-surface px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/70 transition-colors focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20; }
+  .label { @apply mb-1.5 block text-sm font-medium text-ink; }
+  .pill { @apply inline-flex items-center rounded-full bg-tint px-2.5 py-1 text-xs font-semibold text-brand; }
+  .th { @apply px-5 py-3 text-left text-xs font-semibold text-muted; }
+  .td { @apply px-5 py-3.5 text-sm; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .ring-path { stroke-dashoffset: 0 !important; }
+}
